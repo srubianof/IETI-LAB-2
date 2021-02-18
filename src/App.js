@@ -6,6 +6,13 @@ import logo from './logo.svg';
 
 export const App = () => {
     let history = useHistory();
+    localStorage.setItem("isLoggedIn", false)
+    const handleHistoryState = () => {
+        if(!history){
+            setIsLoggedIn(localStorage.getItem("isLoggedIn"));
+        }
+    }
+    localStorage.setItem("isLoggedIn", false)
     const LoginView = () => (
         <Login setLoggedState={setIsLoggedIn} LoggedState={isLoggedIn}/>
     );
@@ -14,6 +21,7 @@ export const App = () => {
         <TodoApp isLoggedIn={isLoggedIn} history={history}/>
     );
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    handleHistoryState()
     return (<Router>
         <div className="App">
             <header className="App-header">
@@ -31,10 +39,7 @@ export const App = () => {
                     : <ul>
                         <li><Link to="/todo">Todo</Link></li>
                     </ul>
-
             }
-
-
             <div>
                 <Route exact path="/" component={LoginView}/>
                 <Route path="/todo" component={TodoAppView}/>

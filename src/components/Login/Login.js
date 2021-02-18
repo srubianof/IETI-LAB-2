@@ -23,18 +23,18 @@ export const Login = ({setLoggedState, LoggedState: isLogged}) => {
 
     let history = useHistory();
     const handleSubmit = () => {
-        setLoggedState(true);
+        localStorage.setItem("isLoggedIn", true);
+        setLoggedState(localStorage.getItem("isLoggedIn"));
         history.push("/todo")
     }
 
     const handleClick = () => {
-        // localStorage.getItem()
         console.log(localStorage)
     }
 
     return (
         <>
-            {!isLogged
+            {eval(isLogged)
                 ?
                 // <CssBaseline/>
                 <main className="layout">
